@@ -15,4 +15,17 @@ symbols=qpskMod(bitSource);
 plot(symbols,'.')
 ```
 
-## 3. 
+## 3. Add AWGN to signal
+snr in db
+```
+symbols = awgn(symbols,snr);
+```
+### Plot the constellation map to see the effect of AWGN 
+```
+plot(symbols,'.')
+```
+
+## 4. QPSK Demodulation
+```
+bitSink=qpskDemod(symbols);
+```
