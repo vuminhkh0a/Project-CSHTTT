@@ -1,4 +1,4 @@
-function [enc, dec] = ldpc_setup()
+function [enc, dec] = Ldpc_encode()
     H = dvbs2ldpc(1/2); 
     enc = comm.LDPCEncoder(H);
     dec = comm.LDPCDecoder(H);
