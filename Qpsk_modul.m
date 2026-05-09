@@ -1,14 +1,8 @@
-function symbols = Qpsk_modul(bitSource)
-    symbols = zeros(1,length(bitSource)/2);
-    for index = 1:2:length(bitSource)
-        if bitSource(index)==0 && bitSource(index+1)==0
-            symbols((index+1)/2) = exp(1i*pi/4);
-        elseif bitSource(index)==0 && bitSource(index+1)==1
-            symbols((index+1)/2) = exp(1i*3*pi/4);
-        elseif bitSource(index)==1 && bitSource(index+1)==1
-            symbols((index+1)/2) = exp(1i*5*pi/4);
-        else
-            symbols((index+1)/2) = exp(1i*7*pi/4);
-        end
+function symbols = Qpsk_modul(bits)
+    symbols = zeros(1, length(bits)/2);
+    for i = 1:2:length(bits)
+        re = (1 - 2*bits(i));     
+        im = (1 - 2*bits(i+1));   
+        symbols((i+1)/2) = (re + 1j*im)/sqrt(2);
     end
 end

@@ -20,7 +20,7 @@ for i = 1:length(EbNo_dB)
         symbols = Qpsk_modul(encoded);
         [faded, h_chan] = Rayleigh(symbols);
         
-        snr = EbNo_dB(i) + 10*log10(k/n);
+        snr = EbNo_dB(i) + 10*log10(k/n) + 10*log10(2); %QPSK carries 2 bits per symbol
         noisy = Add_awgn(faded, snr);
         equalized = noisy ./ h_chan;
         
