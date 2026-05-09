@@ -1,31 +1,25 @@
-﻿# Project CSHTTT
+﻿## Project CSHTT
 
-## 1. Generate BitSource
-n is the size of bitSource vector
-```
-bitSource=generateBits(n);
-```
+### Gen_bits.m
+Generates the random bit source.
 
-## 2. QPSK Modulation
-```
-symbols=qpskMod(bitSource);
-```
-### Plot the constellation map
-```
-plot(symbols,'.')
-```
+### Ldpc_encode.m
+Encodes data based on the Generator matrix $G$ derived from $H$.
 
-## 3. Add AWGN to signal
-snr in db
-```
-symbols = awgn(symbols,snr);
-```
-### Plot the constellation map to see the effect of AWGN 
-```
-plot(symbols,'.')
-```
+### Qpsk_modul.m
+Performs QPSK (4-QAM) modulation.
 
-## 4. QPSK Demodulation
-```
-bitSink=qpskDemod(symbols);
-```
+### Rayleigh.m
+Simulates the multipath fading environment.
+
+### Add_awgn.m
+Adds stochastic noise based on the required SNR.
+
+### Qpsk_demodul.m
+Soft-decision demodulator returning LLR values.
+
+### Ldpc_decode.m
+Iterative Bit-Flipping decoder.
+
+### Ber.m
+Compares original vs. recovered bits to determine error probability.
