@@ -1,8 +1,11 @@
 
-function bitSink = qpskDemod(symbols)
+function bitSink = demod(symbols, g)
   bitSink = zeros(1,length(symbols)*2);
   sTypes = [pi/4,3*pi/4,5*pi/4,7*pi/4];
   sTypes = exp(j*sTypes);
+  for i = 1:length(symbols)/4
+    gS_m(4*i-3:4*i)=g(4*i-3:4*i).*sTypes;
+  endfor
   for index = 1:length(symbols)
     distance = abs(symbols(index)-sTypes);
     minDis = min(distance);
@@ -20,4 +23,3 @@ function bitSink = qpskDemod(symbols)
       bitSink(2*index)=0;
     endif
   endfor
-
