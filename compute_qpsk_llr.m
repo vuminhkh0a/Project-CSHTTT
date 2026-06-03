@@ -1,0 +1,46 @@
+function llr = compute_qpsk_llr(received, channel, N0)
+num_symbols = length(received);
+llr = zeros(2*num_symbols, 1);
+constellation = [
+    exp(1j*pi/4),   
+    exp(3j*pi/4),   
+    exp(5j*pi/4),   
+    exp(7j*pi/4)    
+    ];  
+
+bits = [
+    0, 0;  % index 1: 00
+    0, 1;  % index 2: 01
+    1, 1;  % index 3: 11
+    1, 0   % index 4: 10
+    ];
+
+noise_var = N0/2;  % Variance per dimension
+
+for k = 1:num_symbols
+    h = channel(k);
+    y = received(k);
+
+    % Compute squared distances to all constellation points
+    distances = zeros(4, 1);
+    for m = 1:4
+        distances(m) = abs(y - h*constellation(m))^2;
+    end
+
+    % Compute LLR for bit0 (first bit)
+    % Symbols with bit0=0: indices 1 and 2 (00, 01)
+    min_dist_bit0_0 = min(distances(1), distances(2));
+    % Symbols with bit0=1: indices 3 and 4 (11, 10)
+    min_dist_bit0_1 = min(distances(3), distances(4));
+
+    llr(2*k-1) = (min_dist_bit0_1 - min_dist_bit0_0) / (2*noise_var);
+
+    % Compute LLR for bit1 (second bit)
+    % Symbols with bit1=0: indices 1 and 4 (00, 10)
+    min_dist_bit1_0 = min(distances(1), distances(4));
+    % Symbols with bit1=1: indices 2 and 3 (01, 11)
+    min_dist_bit1_1 = min(distances(2), distances(3));
+
+    llr(2*k) = (min_dist_bit1_1 - min_dist_bit1_0) / (2*noise_var);
+end
+end
