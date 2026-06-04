@@ -21,7 +21,7 @@ f_s = 270800;
 T_symb = 1/f_s;
 
 % Number of codewords
-num_codewords = 20;  % Increase for more accurate results
+num_codewords = 50;  % Increase for more accurate results
 total_bits = num_codewords * block_length;
 total_symbols = total_bits / 2;
 
