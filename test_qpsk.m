@@ -5,7 +5,6 @@ clc;
 n = 10^6;
 bitSource=generateBits(n);
 symbols=qpskMod(bitSource);
-
 snr_db = 0:8;
 snr = zeros(size(snr_db));
 ber = zeros(size(snr_db));
