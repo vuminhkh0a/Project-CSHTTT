@@ -1,4 +1,6 @@
-%Thư viện trên mạng
+%{
+This file is sourced from: https://github.com/tavildar/LDPC
+%}
 classdef LDPCCode < handle
     % Implements LDPC functionality
     %  
